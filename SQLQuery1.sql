@@ -27,9 +27,9 @@ WHERE Color IS NOT NULL AND ListPrice > 0
 
 --- 6.	Write a query that concatenates the columns Name and Color from the Production.Product table by excluding the rows that are null for color.
 
-SELECT Name + ' '+ ISNULL(Color,' ') AS NameAndColor
+SELECT Name + ' '+ Color AS NameAndColor
 FROM Production.Product
-WHERE Color IS NULL
+WHERE Color IS NOT NULL
 
 ---	7.	Write a query that generates the following result set  from Production.Product:
 
