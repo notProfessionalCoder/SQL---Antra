@@ -105,19 +105,16 @@ FROM Customers AS c LEFT JOIN Orders AS o ON O.CustomerID = C.CustomerID JOIN Em
 WHERE O.CustomerID IS NULL
 
 --10. HARD TO READ THE QUESTION
-/*
+
 SELECT o.ShipCity, COUNT(od.Quantity) AS productsold
-FROM Products AS p JOIN [Order Details] AS od ON od.ProductID = p.ProductID JOIN Orders AS o ON o.OrderID = od.OrderID
-GROUP BY o.ShipCity
-WHERE o.shitcity IN (
-(
-SELECT TOP 1 e.City, e.EmployeeID, COUNT(o.OrderID) AS mostORDER --, RANK()OVER(ORDER BY COUNT(o.OrderID) DESC) AS RNK
+FROM Products AS p JOIN [Order Details] AS od ON od.ProductID = p.ProductID JOIN Orders AS o ON o.OrderID = od.OrderID,(
+SELECT TOP 1 e.City, e.EmployeeID, COUNT(o.OrderID) AS mostORDER 
 FROM Orders AS o JOIN Employees AS e ON e.EmployeeID = o.EmployeeID
 GROUP BY e.EmployeeID, e.City
 ORDER BY mostORDER DESC
-)
-)*/
-
+) as dt
+WHERE o.ShipCity = dt.City
+GROUP BY o.ShipCity
 
 
 -- 11. USE DISTINCT 
